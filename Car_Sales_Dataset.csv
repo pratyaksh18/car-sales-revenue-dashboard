@@ -1,0 +1,101 @@
+Sale ID,Date,Brand,Model,Fuel Type,Region,Dealer,Units Sold,Unit Price (INR),Discount (%),Revenue (INR)
+S0001,2026-01-25,Tata,Punch,Electric,North,Prime Motors,14,700000,10,8820000
+S0002,2026-04-22,Tata,Tiago,Petrol,Central,City Auto Hub,1,600000,0,600000
+S0003,2026-05-25,Mahindra,XUV700,Diesel,North,Elite Auto,7,1600000,0,11200000
+S0004,2026-02-26,Maruti Suzuki,Baleno,Petrol,Central,Elite Auto,7,700000,0,4900000
+S0005,2026-01-31,Maruti Suzuki,WagonR,Diesel,East,Speedway Motors,3,600000,10,1620000
+S0006,2026-04-06,Kia,Carens,Diesel,North,Elite Auto,10,1100000,2,10780000
+S0007,2026-05-08,Maruti Suzuki,WagonR,Petrol,Central,Prime Motors,10,600000,2,5880000
+S0008,2026-04-03,Toyota,Urban Cruiser,CNG,West,Elite Auto,15,900000,7,12555000
+S0009,2026-05-15,Tata,Punch,Diesel,South,Prime Motors,10,700000,5,6650000
+S0010,2026-05-12,Mahindra,Thar,Electric,East,Elite Auto,2,1300000,0,2600000
+S0011,2026-06-21,Mahindra,Scorpio,CNG,South,Speedway Motors,7,1400000,0,9800000
+S0012,2026-05-29,Maruti Suzuki,WagonR,CNG,East,Metro Cars,10,600000,7,5580000
+S0013,2026-01-16,Honda,Amaze,Petrol,North,Metro Cars,8,800000,0,6400000
+S0014,2026-01-06,Toyota,Glanza,Electric,East,Speedway Motors,15,750000,5,10687500
+S0015,2026-02-25,Mahindra,Thar,Diesel,Central,Prime Motors,8,1300000,0,10400000
+S0016,2026-01-21,Honda,Amaze,Diesel,South,Speedway Motors,7,800000,7,5208000
+S0017,2026-07-29,Hyundai,Verna,Electric,Central,Metro Cars,15,1150000,2,16905000
+S0018,2026-03-01,Mahindra,XUV300,CNG,West,Metro Cars,11,950000,7,9718500
+S0019,2026-01-04,Hyundai,Creta,Diesel,South,City Auto Hub,11,1150000,2,12397000
+S0020,2026-04-18,Mahindra,XUV300,Diesel,East,Metro Cars,1,950000,2,931000
+S0021,2026-04-27,Kia,Carens,CNG,South,Elite Auto,10,1100000,0,11000000
+S0022,2026-05-04,Honda,Elevate,Electric,West,Speedway Motors,7,1300000,0,9100000
+S0023,2026-02-11,Toyota,Urban Cruiser,Petrol,South,Prime Motors,4,900000,7,3348000
+S0024,2026-05-18,Maruti Suzuki,Alto,Petrol,North,Prime Motors,10,450000,2,4410000
+S0025,2026-02-08,Maruti Suzuki,Alto,Petrol,North,City Auto Hub,10,450000,7,4185000
+S0026,2026-01-30,Toyota,Glanza,CNG,Central,Metro Cars,8,750000,0,6000000
+S0027,2026-02-06,Honda,Amaze,Electric,West,Speedway Motors,5,800000,0,4000000
+S0028,2026-02-22,Maruti Suzuki,Alto,CNG,West,City Auto Hub,9,450000,0,4050000
+S0029,2026-03-18,Kia,Carens,Diesel,Central,Prime Motors,13,1100000,10,12870000
+S0030,2026-04-02,Toyota,Innova,Diesel,Central,Metro Cars,15,2000000,2,29400000
+S0031,2026-07-26,Honda,City,CNG,South,Elite Auto,13,1250000,2,15925000
+S0032,2026-07-07,Hyundai,Verna,Diesel,South,Elite Auto,8,1150000,5,8740000
+S0033,2026-03-30,Maruti Suzuki,Swift,CNG,West,Metro Cars,4,650000,10,2340000
+S0034,2026-05-01,Mahindra,Thar,CNG,North,City Auto Hub,2,1300000,2,2548000
+S0035,2026-01-01,Hyundai,Venue,Diesel,West,Elite Auto,15,900000,10,12150000
+S0036,2026-05-03,Mahindra,Thar,Petrol,North,Speedway Motors,13,1300000,2,16562000
+S0037,2026-07-10,Hyundai,Verna,CNG,North,Speedway Motors,8,1150000,7,8556000
+S0038,2026-04-30,Maruti Suzuki,Baleno,Diesel,South,Prime Motors,3,700000,10,1890000
+S0039,2026-02-09,Honda,Elevate,Diesel,Central,Elite Auto,8,1300000,5,9880000
+S0040,2026-04-22,Kia,Sonet,Petrol,North,Prime Motors,9,800000,2,7056000
+S0041,2026-05-09,Honda,City,Diesel,North,Metro Cars,4,1250000,5,4750000
+S0042,2026-01-16,Hyundai,Exter,CNG,East,Elite Auto,7,750000,2,5145000
+S0043,2026-02-03,Toyota,Glanza,Electric,Central,Elite Auto,7,750000,10,4725000
+S0044,2026-07-18,Kia,Sonet,Petrol,West,City Auto Hub,10,800000,0,8000000
+S0045,2026-05-23,Honda,City,Diesel,South,Speedway Motors,10,1250000,0,12500000
+S0046,2026-02-18,Maruti Suzuki,Alto,Electric,North,Elite Auto,1,450000,2,441000
+S0047,2026-07-14,Tata,Nexon,Petrol,Central,Speedway Motors,9,900000,0,8100000
+S0048,2026-02-21,Maruti Suzuki,Brezza,CNG,Central,Elite Auto,10,1150000,10,10350000
+S0049,2026-05-10,Toyota,Glanza,Electric,Central,Elite Auto,13,750000,7,9067500
+S0050,2026-02-05,Hyundai,Exter,CNG,Central,City Auto Hub,14,750000,7,9765000
+S0051,2026-04-20,Mahindra,XUV700,Electric,West,Metro Cars,2,1600000,2,3136000
+S0052,2026-02-06,Maruti Suzuki,Baleno,CNG,North,City Auto Hub,12,700000,5,7980000
+S0053,2026-02-11,Tata,Punch,Electric,South,Prime Motors,7,700000,7,4557000
+S0054,2026-04-18,Toyota,Fortuner,Petrol,West,Elite Auto,7,4000000,5,26600000
+S0055,2026-05-22,Hyundai,Venue,CNG,North,Metro Cars,1,900000,5,855000
+S0056,2026-03-17,Mahindra,Bolero,Petrol,West,Metro Cars,9,950000,10,7695000
+S0057,2026-03-11,Kia,Seltos,Petrol,South,Prime Motors,2,1150000,5,2185000
+S0058,2026-04-14,Maruti Suzuki,Baleno,CNG,South,Speedway Motors,14,700000,5,9310000
+S0059,2026-07-24,Hyundai,Exter,Electric,East,Prime Motors,5,750000,0,3750000
+S0060,2026-07-25,Toyota,Fortuner,Diesel,North,Metro Cars,1,4000000,0,4000000
+S0061,2026-04-27,Tata,Nexon,Diesel,North,Metro Cars,14,900000,0,12600000
+S0062,2026-05-15,Maruti Suzuki,Alto,Electric,East,Elite Auto,3,450000,0,1350000
+S0063,2026-02-21,Toyota,Fortuner,Petrol,South,Metro Cars,1,4000000,2,3920000
+S0064,2026-03-11,Tata,Harrier,Diesel,East,Speedway Motors,9,1650000,2,14553000
+S0065,2026-05-22,Tata,Nexon,CNG,North,Prime Motors,1,900000,10,810000
+S0066,2026-06-18,Hyundai,Exter,Electric,South,Speedway Motors,2,750000,7,1395000
+S0067,2026-02-28,Mahindra,XUV300,Electric,Central,Metro Cars,12,950000,2,11172000
+S0068,2026-01-04,Tata,Punch,Diesel,West,Metro Cars,1,700000,2,686000
+S0069,2026-05-10,Maruti Suzuki,Alto,Electric,South,Prime Motors,2,450000,7,837000
+S0070,2026-02-10,Toyota,Glanza,Diesel,East,Prime Motors,8,750000,2,5880000
+S0071,2026-03-24,Tata,Altroz,Petrol,East,Metro Cars,6,750000,10,4050000
+S0072,2026-03-27,Hyundai,Creta,CNG,South,Metro Cars,3,1150000,0,3450000
+S0073,2026-03-05,Mahindra,XUV700,Electric,East,Elite Auto,11,1600000,2,17248000
+S0074,2026-05-31,Kia,Seltos,Petrol,East,Prime Motors,3,1150000,7,3208500
+S0075,2026-01-22,Maruti Suzuki,Brezza,Petrol,East,Metro Cars,11,1150000,2,12397000
+S0076,2026-07-05,Kia,Sonet,Electric,East,Speedway Motors,3,800000,5,2280000
+S0077,2026-02-05,Kia,Sonet,Petrol,Central,Speedway Motors,12,800000,10,8640000
+S0078,2026-06-13,Kia,Seltos,Diesel,North,Prime Motors,1,1150000,2,1127000
+S0079,2026-06-10,Tata,Nexon,Electric,West,Elite Auto,1,900000,0,900000
+S0080,2026-07-11,Kia,Sonet,Electric,East,Prime Motors,8,800000,0,6400000
+S0081,2026-03-09,Kia,Seltos,Petrol,West,Metro Cars,13,1150000,0,14950000
+S0082,2026-01-20,Hyundai,i20,Diesel,West,Speedway Motors,14,750000,7,9765000
+S0083,2026-02-07,Mahindra,Thar,Petrol,Central,City Auto Hub,2,1300000,10,2340000
+S0084,2026-05-04,Tata,Harrier,CNG,Central,Elite Auto,3,1650000,0,4950000
+S0085,2026-03-16,Maruti Suzuki,Brezza,CNG,North,City Auto Hub,11,1150000,7,11764500
+S0086,2026-05-21,Toyota,Glanza,Electric,West,Speedway Motors,13,750000,0,9750000
+S0087,2026-01-20,Hyundai,Venue,Petrol,West,Prime Motors,5,900000,7,4185000
+S0088,2026-01-20,Honda,Elevate,Electric,East,Speedway Motors,4,1300000,2,5096000
+S0089,2026-06-04,Kia,Seltos,Diesel,Central,Metro Cars,6,1150000,2,6762000
+S0090,2026-05-05,Honda,Elevate,CNG,North,Metro Cars,4,1300000,7,4836000
+S0091,2026-04-14,Mahindra,XUV700,Diesel,North,Speedway Motors,11,1600000,7,16368000
+S0092,2026-03-26,Tata,Punch,Electric,East,Speedway Motors,6,700000,0,4200000
+S0093,2026-07-02,Maruti Suzuki,Alto,CNG,West,Prime Motors,15,450000,2,6615000
+S0094,2026-05-31,Maruti Suzuki,Alto,CNG,East,Prime Motors,7,450000,7,2929500
+S0095,2026-01-14,Maruti Suzuki,Alto,Electric,East,Prime Motors,5,450000,0,2250000
+S0096,2026-05-11,Honda,Elevate,CNG,South,City Auto Hub,5,1300000,7,6045000
+S0097,2026-05-22,Tata,Punch,CNG,West,Prime Motors,13,700000,7,8463000
+S0098,2026-07-12,Kia,Sonet,Petrol,North,Speedway Motors,8,800000,10,5760000
+S0099,2026-05-01,Hyundai,Venue,Electric,North,Elite Auto,3,900000,2,2646000
+S0100,2026-04-14,Mahindra,Thar,CNG,East,Metro Cars,12,1300000,5,14820000
