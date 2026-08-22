@@ -1,0 +1,126 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Predictive Analytics Using Historical Data - Car Sales</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:30px auto;padding:0 20px;line-height:1.55;color:#1a1a1a}
+h1,h2,h3{color:#1F4E78}
+pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:12px;overflow-x:auto;font-size:13px}
+code{font-family:Consolas,Menlo,monospace}
+.md{margin:14px 0}
+.code-cell{margin:14px 0}
+</style></head><body>
+<h1>Predictive Analytics Using Historical Data — Car Sales</h1>
+
+<div class="md"><h1>Predictive Analytics Using Historical Data — Car Sales</h1><br><p>**Goal:** Build a predictive model to forecast future trends using regression / time-series models. Clean and preprocess historical data, evaluate model accuracy, and visualize predictions.</p><br><p>This notebook builds two complementary models:</p><p>1. **Transaction-level regression** — predicts Revenue per sale from its features.</p><p>2. **Monthly revenue time-series forecast** — projects revenue for the next 3 months.</p></div>
+<div class="md"><h2>1. Imports &amp; Load Data</h2></div>
+<div class="code-cell"><pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+
+sns.set_style(&#x27;whitegrid&#x27;)
+plt.rcParams[&#x27;figure.dpi&#x27;] = 110
+
+df = pd.read_csv(&#x27;Car_Sales_Dataset.csv&#x27;)
+df[&#x27;Date&#x27;] = pd.to_datetime(df[&#x27;Date&#x27;])
+df.head()</code></pre></div>
+<div class="md"><h2>2. Clean &amp; Preprocess Historical Data</h2></div>
+<div class="code-cell"><pre><code>print(&#x27;Missing values:\n&#x27;, df.isnull().sum())
+print(&#x27;\nDuplicate rows:&#x27;, df.duplicated().sum())
+
+df = df.drop_duplicates()
+df = df[(df[&#x27;Units Sold&#x27;] &gt; 0) &amp; (df[&#x27;Unit Price (INR)&#x27;] &gt; 0) &amp; (df[&#x27;Revenue (INR)&#x27;] &gt;= 0)]
+df[&#x27;Month&#x27;] = df[&#x27;Date&#x27;].dt.to_period(&#x27;M&#x27;).dt.to_timestamp()
+print(&#x27;\nClean shape:&#x27;, df.shape)</code></pre></div>
+<div class="md"><h2>Part A: Transaction-Level Revenue Regression</h2></div>
+<div class="md"><h3>3. Train/Test Split &amp; Preprocessing Pipeline</h3></div>
+<div class="code-cell"><pre><code>feature_cols = [&#x27;Units Sold&#x27;, &#x27;Unit Price (INR)&#x27;, &#x27;Discount (%)&#x27;,
+                &#x27;Brand&#x27;, &#x27;Fuel Type&#x27;, &#x27;Region&#x27;, &#x27;Dealer&#x27;]
+target_col = &#x27;Revenue (INR)&#x27;
+
+X = df[feature_cols]
+y = df[target_col]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+numeric_features = [&#x27;Units Sold&#x27;, &#x27;Unit Price (INR)&#x27;, &#x27;Discount (%)&#x27;]
+categorical_features = [&#x27;Brand&#x27;, &#x27;Fuel Type&#x27;, &#x27;Region&#x27;, &#x27;Dealer&#x27;]
+
+preprocessor = ColumnTransformer(transformers=[
+    (&#x27;num&#x27;, StandardScaler(), numeric_features),
+    (&#x27;cat&#x27;, OneHotEncoder(handle_unknown=&#x27;ignore&#x27;), categorical_features)
+])</code></pre></div>
+<div class="md"><h3>4. Train Models (Linear Regression &amp; Random Forest)</h3></div>
+<div class="code-cell"><pre><code>models = {
+    &#x27;Linear Regression&#x27;: LinearRegression(),
+    &#x27;Random Forest&#x27;: RandomForestRegressor(n_estimators=200, random_state=42, max_depth=6)
+}
+
+results = {}
+predictions = {}
+
+for name, model in models.items():
+    pipe = Pipeline([(&#x27;prep&#x27;, preprocessor), (&#x27;model&#x27;, model)])
+    pipe.fit(X_train, y_train)
+    preds = pipe.predict(X_test)
+    predictions[name] = preds
+
+    r2 = r2_score(y_test, preds)
+    mae = mean_absolute_error(y_test, preds)
+    rmse = np.sqrt(mean_squared_error(y_test, preds))
+    mape = np.mean(np.abs((y_test - preds) / y_test)) * 100
+    results[name] = {&#x27;R2&#x27;: r2, &#x27;MAE&#x27;: mae, &#x27;RMSE&#x27;: rmse, &#x27;MAPE&#x27;: mape}
+
+pd.DataFrame(results).T</code></pre></div>
+<div class="md"><h3>5. Visualize Actual vs Predicted (Best Model)</h3></div>
+<div class="code-cell"><pre><code>best_model_name = pd.DataFrame(results).T[&#x27;R2&#x27;].idxmax()
+best_preds = predictions[best_model_name]
+
+plt.figure(figsize=(6.5, 6))
+plt.scatter(y_test, best_preds, alpha=0.6, edgecolor=&#x27;black&#x27;)
+lims = [min(y_test.min(), best_preds.min()), max(y_test.max(), best_preds.max())]
+plt.plot(lims, lims, &#x27;--&#x27;, color=&#x27;red&#x27;, label=&#x27;Perfect Prediction&#x27;)
+plt.xlabel(&#x27;Actual Revenue&#x27;); plt.ylabel(&#x27;Predicted Revenue&#x27;)
+plt.title(f&#x27;Actual vs Predicted Revenue ({best_model_name})&#x27;)
+plt.legend(); plt.show()</code></pre></div>
+<div class="md"><h3>6. Feature Importance (Random Forest)</h3></div>
+<div class="code-cell"><pre><code>rf_pipe = Pipeline([(&#x27;prep&#x27;, preprocessor), (&#x27;model&#x27;, models[&#x27;Random Forest&#x27;])])
+rf_pipe.fit(X_train, y_train)
+ohe = rf_pipe.named_steps[&#x27;prep&#x27;].named_transformers_[&#x27;cat&#x27;]
+feature_names = numeric_features + list(ohe.get_feature_names_out(categorical_features))
+importances = rf_pipe.named_steps[&#x27;model&#x27;].feature_importances_
+imp_df = pd.DataFrame({&#x27;feature&#x27;: feature_names, &#x27;importance&#x27;: importances}).sort_values(&#x27;importance&#x27;, ascending=False).head(10)
+
+sns.barplot(data=imp_df, x=&#x27;importance&#x27;, y=&#x27;feature&#x27;, color=&#x27;#55A868&#x27;)
+plt.title(&#x27;Top Feature Importances&#x27;); plt.show()</code></pre></div>
+<div class="md"><h2>Part B: Monthly Revenue Time-Series Forecast</h2></div>
+<div class="code-cell"><pre><code>monthly = df.groupby(&#x27;Month&#x27;)[&#x27;Revenue (INR)&#x27;].sum().reset_index().sort_values(&#x27;Month&#x27;).reset_index(drop=True)
+monthly[&#x27;t&#x27;] = np.arange(len(monthly))
+monthly</code></pre></div>
+<div class="code-cell"><pre><code>lr_ts = LinearRegression()
+lr_ts.fit(monthly[[&#x27;t&#x27;]], monthly[&#x27;Revenue (INR)&#x27;])
+monthly[&#x27;Fitted&#x27;] = lr_ts.predict(monthly[[&#x27;t&#x27;]])
+
+future_t = np.arange(len(monthly), len(monthly) + 3)
+future_months = pd.date_range(monthly[&#x27;Month&#x27;].max() + pd.offsets.MonthBegin(1), periods=3, freq=&#x27;MS&#x27;)
+future_preds = lr_ts.predict(future_t.reshape(-1, 1))
+
+forecast_df = pd.DataFrame({&#x27;Month&#x27;: future_months, &#x27;Forecast_Revenue&#x27;: future_preds})
+forecast_df</code></pre></div>
+<div class="code-cell"><pre><code>plt.figure(figsize=(9, 5))
+plt.plot(monthly[&#x27;Month&#x27;], monthly[&#x27;Revenue (INR)&#x27;], marker=&#x27;o&#x27;, label=&#x27;Actual Revenue&#x27;)
+plt.plot(monthly[&#x27;Month&#x27;], monthly[&#x27;Fitted&#x27;], linestyle=&#x27;--&#x27;, label=&#x27;Trend Fit&#x27;)
+plt.plot(forecast_df[&#x27;Month&#x27;], forecast_df[&#x27;Forecast_Revenue&#x27;], marker=&#x27;o&#x27;, linestyle=&#x27;--&#x27;, label=&#x27;Forecast&#x27;)
+plt.title(&#x27;Monthly Revenue: Historical Trend &amp; 3-Month Forecast&#x27;)
+plt.legend(); plt.xticks(rotation=30); plt.show()</code></pre></div>
+<div class="md"><h2>7. Save Results</h2></div>
+<div class="code-cell"><pre><code>pd.DataFrame(results).T.to_csv(&#x27;model_evaluation_metrics.csv&#x27;)
+forecast_df.to_csv(&#x27;monthly_revenue_forecast.csv&#x27;, index=False)
+print(&#x27;Saved.&#x27;)</code></pre></div>
+</body></html>
