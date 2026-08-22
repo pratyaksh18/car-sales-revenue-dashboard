@@ -1,0 +1,7 @@
+Metric,Before,After
+Rows,110.0,103.0
+Missing Cells,18.0,0.0
+Missing %,1.49,0.0
+Duplicate Rows,1.0,0.0
+Inconsistent Text Entries,45.0,2.0
+Data Quality Score,87.9,99.6
