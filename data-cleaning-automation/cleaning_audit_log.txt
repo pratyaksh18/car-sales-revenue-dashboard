@@ -1,0 +1,18 @@
+DATA CLEANING AUTOMATION — AUDIT LOG
+==================================================
+
+[16:12:38] Loaded 110 rows x 11 columns
+[16:12:38] Removed 1 exact duplicate row(s)
+[16:12:38] Standardized text formatting in 'Model' (13 values affected)
+[16:12:38] Standardized text formatting in 'Fuel Type' (28 values affected)
+[16:12:38] Standardized text formatting in 'Region' (27 values affected)
+[16:12:38] Parsed 'Date' into a consistent datetime format
+[16:12:38] Removed 6 exact duplicate row(s)
+[16:12:38] Flagged 2 invalid non-positive value(s) in 'Units Sold' for re-imputation
+[16:12:38] Flagged 3 invalid negative value(s) in 'Discount (%)' for re-imputation
+[16:12:38] Imputed 2 missing value(s) in 'Units Sold' with median (8.0)
+[16:12:38] Imputed 5 missing value(s) in 'Unit Price (INR)' with median (900000.0)
+[16:12:38] Imputed 9 missing value(s) in 'Discount (%)' with median (2.0)
+[16:12:38] Recomputed 'Revenue (INR)' from source fields to ensure consistency (11 rows corrected)
+
+Data Quality Score: 87.9 -> 99.6 (out of 100)
