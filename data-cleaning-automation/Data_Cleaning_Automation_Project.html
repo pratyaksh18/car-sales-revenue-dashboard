@@ -1,0 +1,52 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Data Cleaning & Reporting Automation</title>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:900px;margin:30px auto;padding:0 20px;line-height:1.55;color:#1a1a1a}
+h1,h2,h3{color:#1F4E78}
+pre{background:#f6f8fa;border:1px solid #e1e4e8;border-radius:6px;padding:12px;overflow-x:auto;font-size:13px}
+code{font-family:Consolas,Menlo,monospace}
+.md{margin:14px 0}
+.code-cell{margin:14px 0}
+</style></head><body>
+<h1>Data Cleaning &amp; Reporting Automation</h1>
+
+<div class="md"><h1>Data Cleaning &amp; Reporting Automation</h1><br><p>**Goal:** Automate data cleaning and reporting workflows using Python. Handle missing values, duplicates, and inconsistent data automatically, and generate automated reports with visual summaries.</p><br><p>**Approach:** A reusable `DataCleaningAutomation` class (in `data_cleaning_automation.py`) is built that works on *any* similarly-shaped CSV — not hardcoded to one dataset. It is demonstrated here on a deliberately &#x27;messy&#x27; raw version of the Car Sales dataset (missing values, duplicate rows, inconsistent text casing/whitespace, mixed date formats, and invalid numeric entries were injected to simulate realistic raw data — the original dataset was already clean).</p></div>
+<div class="md"><h2>1. Generate a Realistic &#x27;Messy&#x27; Raw Dataset</h2><br><p>To genuinely demonstrate automated cleaning, common real-world data problems are injected into a copy of the clean Car Sales dataset: missing values, exact + near duplicate rows (different casing), inconsistent text (whitespace/casing), mixed date formats, and invalid numeric entries.</p></div>
+<div class="code-cell"><pre><code># See make_messy_data.py for the full generation logic
+import pandas as pd
+messy = pd.read_csv(&#x27;Car_Sales_RAW_messy.csv&#x27;)
+print(messy.shape)
+messy.head()</code></pre></div>
+<div class="md"><h2>2. Import the Automation Pipeline</h2></div>
+<div class="code-cell"><pre><code>from data_cleaning_automation import DataCleaningAutomation
+
+pipeline = DataCleaningAutomation(&#x27;Car_Sales_RAW_messy.csv&#x27;, id_column=&#x27;Sale ID&#x27;)</code></pre></div>
+<div class="md"><h2>3. Run the Full Automated Cleaning Pipeline</h2><br><p>A single `.run()` call performs, in order:</p><p>1. Load data</p><p>2. Profile raw data quality (missing %, duplicates, inconsistent text)</p><p>3. Remove duplicates, standardize text formatting, parse dates consistently</p><p>4. Re-check for duplicates created by text standardization</p><p>5. Flag and fix invalid numeric entries (e.g. negative discount, zero units)</p><p>6. Impute missing values (median for numeric, mode for categorical)</p><p>7. Recompute dependent columns (Revenue) for consistency</p><p>8. Profile cleaned data quality</p></div>
+<div class="code-cell"><pre><code>pipeline.run(
+    numeric_validity_rules={
+        &#x27;Units Sold&#x27;: &#x27;positive&#x27;,
+        &#x27;Discount (%)&#x27;: &#x27;non_negative&#x27;,
+        &#x27;Unit Price (INR)&#x27;: &#x27;positive&#x27;,
+    },
+    formula_cols={
+        &#x27;Revenue (INR)&#x27;: lambda df: df[&#x27;Units Sold&#x27;] * df[&#x27;Unit Price (INR)&#x27;] *
+                                     (1 - df[&#x27;Discount (%)&#x27;] / 100)
+    }
+)</code></pre></div>
+<div class="md"><h2>4. Generate the Automated Report (Charts + Logs + Cleaned Data)</h2></div>
+<div class="code-cell"><pre><code>summary = pipeline.save_report(output_dir=&#x27;.&#x27;)
+summary</code></pre></div>
+<div class="md"><h2>5. Visual Summary — Before vs After</h2></div>
+<div class="code-cell"><pre><code>from IPython.display import Image, display
+display(Image(&#x27;chart_quality_before_after.png&#x27;))
+display(Image(&#x27;chart_quality_score.png&#x27;))
+display(Image(&#x27;chart_missing_by_column.png&#x27;))</code></pre></div>
+<div class="md"><h2>6. Audit Trail</h2><br><p>Every cleaning action is logged in order, so the pipeline is fully transparent and reproducible.</p></div>
+<div class="code-cell"><pre><code>with open(&#x27;cleaning_audit_log.txt&#x27;) as f:
+    print(f.read())</code></pre></div>
+<div class="md"><h2>7. Cleaned Data Preview</h2></div>
+<div class="code-cell"><pre><code>cleaned = pd.read_csv(&#x27;cleaned_data.csv&#x27;)
+print(cleaned.shape)
+cleaned.head()</code></pre></div>
+<div class="md"><h2>8. Reusability</h2><br><p>Because the pipeline auto-detects column types (numeric vs categorical vs date) rather than hardcoding column names, the same `DataCleaningAutomation` class can be pointed at a different dataset (e.g. the Stationery Sales dataset) with only the validity rules changed — no rewrite needed. This is what makes it a genuine **automation tool** rather than a one-off script.</p></div>
+</body></html>
